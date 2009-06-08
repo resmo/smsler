@@ -1,5 +1,19 @@
 /*
  * SmslerView.java
+ * 
+ * Copyright (C) 2009  René Moser
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 package smsler;
@@ -12,7 +26,9 @@ import org.jdesktop.application.Task;
 import org.jdesktop.application.TaskMonitor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import javax.swing.Timer;
 import javax.swing.Icon;
 import javax.swing.JDialog;
@@ -30,9 +46,8 @@ public class SmslerView extends FrameView {
 
     public SmslerView(SingleFrameApplication app) {
         super(app);
-
         initComponents();
-        phoneNumberField.requestFocus();
+        initPreferencesPath();
         
         // status bar initialization - message timeout, idle icon and busy animation, etc
         ResourceMap resourceMap = getResourceMap();
@@ -305,16 +320,21 @@ public class SmslerView extends FrameView {
         }
         @Override protected Object doInBackground() {
             try {
-                prop.load(new FileInputStream(filename));
+                prop.load(new FileInputStream(homeDir+filename));
                 String provider = prop.getProperty("provider");
                 String username = prop.getProperty("username");
                 String password = prop.getProperty("password");
+               
                 ShortMessageService Service = ServiceFactory.getService(provider);
                 Service.doLogin(username, password);
                 int availableMessages = Service.getAvailableMessages();
                 availMessagesField.setText(Integer.toString(availableMessages));
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(new JFrame(),  "Check failed: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                String errorMessage = "Missing preferences. Open File -> Preferences!";
+                if (e.getMessage() != null) {
+                    errorMessage = e.getMessage();
+                }
+                JOptionPane.showMessageDialog(new JFrame(),  "Check failed: " + errorMessage, "Error", JOptionPane.ERROR_MESSAGE);
             }
             return null;  // return your result
         }
@@ -337,7 +357,7 @@ public class SmslerView extends FrameView {
         }
         @Override protected Object doInBackground() {
             try {
-                prop.load(new FileInputStream(filename));
+                prop.load(new FileInputStream(homeDir+filename));
                 String provider = prop.getProperty("provider");
                 String username = prop.getProperty("username");
                 String password = prop.getProperty("password");
@@ -348,7 +368,11 @@ public class SmslerView extends FrameView {
                 availMessagesField.setText(Integer.toString(availableMessages));
                 JOptionPane.showMessageDialog(new JFrame(), "Your message has been sent.", "Information", JOptionPane.INFORMATION_MESSAGE);
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(new JFrame(), "Your message could not be sent: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                String errorMessage = "Missing preferences. Open File -> Preferences!";
+                if (e.getMessage() != null) {
+                    errorMessage = e.getMessage();
+                }
+                JOptionPane.showMessageDialog(new JFrame(), "Your message could not be sent: " + errorMessage, "Error", JOptionPane.ERROR_MESSAGE);
             }
             return null;  // return your result
         }
@@ -363,6 +387,22 @@ public class SmslerView extends FrameView {
         phoneNumberField.setText("");
         messageField.setText("");
         phoneNumberField.requestFocus();
+    }
+
+    private void initPreferencesPath() {
+        boolean homeDirExists = (new File(homeDir)).exists();
+        if (!homeDirExists) {
+            new File(homeDir).mkdirs();
+        }
+        try {
+            boolean filenameExists = (new File(homeDir+filename)).exists();
+            if (!filenameExists) {
+                new FileOutputStream(homeDir+filename);
+            }
+        } catch (Exception e)  {
+            JOptionPane.showMessageDialog(new JFrame(), "Could not create preferences file: " + e.getMessage()+"\nMake sure that I can! Aborting...", "Error", JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
+        }
     }
 
 
@@ -395,5 +435,7 @@ public class SmslerView extends FrameView {
     private JDialog aboutBox;
     private JDialog preferencesBox;
     private Properties prop = new Properties();
-    private String filename = System.getProperty("user.home")+"/.smsler/main.properties";
+    private String filename = "main.properties";
+    private String homeDir = System.getProperty("user.home")+"/.smsler/";
+
 }

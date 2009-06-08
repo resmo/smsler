@@ -1,7 +1,19 @@
 /*
  * SmslerPreferencesBox.java
  *
- * Created on Jun 5, 2009, 10:18:28 PM
+ * Copyright (C) 2009  René Moser
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 package smsler;
@@ -31,16 +43,11 @@ public class SmslerPreferencesBox extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         try {
-            prop.load(new FileInputStream(filename));
+            prop.load(new FileInputStream(homeDir+filename));
             usernameField.setText(prop.getProperty("username"));
             passwordField.setText(prop.getProperty("password"));
         } catch (IOException e) {
-            try {
-                new FileOutputStream(filename);
-                JOptionPane.showMessageDialog(new JFrame(), "New prefences file created", "Information", JOptionPane.INFORMATION_MESSAGE);
-            } catch (IOException e2) {
-                JOptionPane.showMessageDialog(new JFrame(), "Could not create preferences file: " + e2.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            } 
+            JOptionPane.showMessageDialog(new JFrame(), "Could not read preferences file: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
          ArrayList<String> providers = new ArrayList<String>();
 
@@ -214,17 +221,29 @@ public class SmslerPreferencesBox extends javax.swing.JDialog {
 
     @Action
     public void savePreferences() {
-        prop.setProperty("provider", providerComboBox.getSelectedItem().toString());
-        prop.setProperty("username", usernameField.getText());
-        String plainPassword = new String(passwordField.getPassword());
-        prop.setProperty("password", plainPassword);
-        
+
         try {
-            prop.store(new FileOutputStream(filename), null);
+            
+            String provider = providerComboBox.getSelectedItem().toString();
+            String username =  usernameField.getText();
+            String plainPassword =  new String(passwordField.getPassword());
+
+            if (provider.isEmpty() || username.isEmpty() || plainPassword.isEmpty()) {
+                throw new Exception("You did not fill all required forms.");
+            }
+
+            prop.setProperty("provider", providerComboBox.getSelectedItem().toString());
+            prop.setProperty("username", usernameField.getText());
+            prop.setProperty("password", plainPassword);
+            prop.store(new FileOutputStream(homeDir+filename), null);
+            doClose(1);
+            
+
         } catch (IOException e) {
             JOptionPane.showMessageDialog(new JFrame(), "Could not save preferences: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(new JFrame(), "Could not save preferences: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-        doClose(1);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -240,5 +259,6 @@ public class SmslerPreferencesBox extends javax.swing.JDialog {
 
     private int returnStatus = RET_CANCEL;
     private Properties prop = new Properties();
-    private String filename = System.getProperty("user.home")+"/.smsler/main.properties";
+    private String filename = "main.properties";
+    private String homeDir = System.getProperty("user.home")+"/.smsler/";
 }
