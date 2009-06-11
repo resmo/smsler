@@ -60,7 +60,7 @@
                           <Component id="clearButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="15" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -68,18 +68,21 @@
       <SubComponents>
         <Component class="javax.swing.JTextField" name="phoneNumberField">
           <Properties>
+            <Property name="font" type="java.awt.Font" resourceKey="phoneNumberField.font"/>
             <Property name="text" type="java.lang.String" resourceKey="phoneNumberField.text"/>
             <Property name="name" type="java.lang.String" value="phoneNumberField" noResource="true"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="phoneNumberLabel">
           <Properties>
+            <Property name="font" type="java.awt.Font" resourceKey="phoneNumberLabel.font"/>
             <Property name="text" type="java.lang.String" resourceKey="phoneNumberLabel.text"/>
             <Property name="name" type="java.lang.String" value="phoneNumberLabel" noResource="true"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="messageLabel">
           <Properties>
+            <Property name="font" type="java.awt.Font" resourceKey="messageLabel.font"/>
             <Property name="text" type="java.lang.String" resourceKey="messageLabel.text"/>
             <Property name="name" type="java.lang.String" value="messageLabel" noResource="true"/>
           </Properties>
@@ -97,6 +100,8 @@
             <Component class="javax.swing.JTextArea" name="messageField">
               <Properties>
                 <Property name="columns" type="int" value="20"/>
+                <Property name="font" type="java.awt.Font" resourceKey="messageField.font"/>
+                <Property name="lineWrap" type="boolean" value="true"/>
                 <Property name="rows" type="int" value="5"/>
                 <Property name="name" type="java.lang.String" value="messageField" noResource="true"/>
               </Properties>
@@ -105,6 +110,8 @@
         </Container>
         <Component class="javax.swing.JTextField" name="availMessagesField">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="font" type="java.awt.Font" resourceKey="availMessagesField.font"/>
             <Property name="text" type="java.lang.String" resourceKey="availMessagesField.text"/>
             <Property name="name" type="java.lang.String" value="availMessagesField" noResource="true"/>
           </Properties>
@@ -114,6 +121,8 @@
             <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
               <action class="smsler.SmslerView" id="checkButtonPerformed" methodName="checkButtonPerformed"/>
             </Property>
+            <Property name="font" type="java.awt.Font" resourceKey="checkAvailMessagesButton.font"/>
+            <Property name="mnemonic" type="int" value="67"/>
             <Property name="text" type="java.lang.String" resourceKey="checkAvailMessagesButton.text"/>
             <Property name="name" type="java.lang.String" value="checkAvailMessagesButton" noResource="true"/>
           </Properties>
@@ -123,12 +132,15 @@
             <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
               <action class="smsler.SmslerView" id="sendButtonPerformed" methodName="sendButtonPerformed"/>
             </Property>
+            <Property name="font" type="java.awt.Font" resourceKey="sendMessageButton.font"/>
+            <Property name="mnemonic" type="int" value="83"/>
             <Property name="text" type="java.lang.String" resourceKey="sendMessageButton.text"/>
             <Property name="name" type="java.lang.String" value="sendMessageButton" noResource="true"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="availMessagesLabel">
           <Properties>
+            <Property name="font" type="java.awt.Font" resourceKey="availMessagesLabel.font"/>
             <Property name="text" type="java.lang.String" resourceKey="availMessagesLabel.text"/>
             <Property name="name" type="java.lang.String" value="availMessagesLabel" noResource="true"/>
           </Properties>
@@ -138,6 +150,8 @@
             <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
               <action class="smsler.SmslerView" id="clearButtonPerformed" methodName="clearButtonPerformed"/>
             </Property>
+            <Property name="font" type="java.awt.Font" resourceKey="clearButton.font"/>
+            <Property name="mnemonic" type="int" value="76"/>
             <Property name="text" type="java.lang.String" resourceKey="clearButton.text"/>
             <Property name="name" type="java.lang.String" value="clearButton" noResource="true"/>
           </Properties>
@@ -155,6 +169,7 @@
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="fileMenu">
           <Properties>
+            <Property name="mnemonic" type="int" value="70"/>
             <Property name="text" type="java.lang.String" resourceKey="fileMenu.text"/>
             <Property name="name" type="java.lang.String" value="fileMenu" noResource="true"/>
           </Properties>
@@ -168,6 +183,10 @@
                 <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
                   <action class="smsler.SmslerView" id="showPreferencesBox" methodName="showPreferencesBox"/>
                 </Property>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Ctrl+R"/>
+                </Property>
+                <Property name="mnemonic" type="int" value="82"/>
                 <Property name="text" type="java.lang.String" resourceKey="preferencesMenuItem.text"/>
                 <Property name="name" type="java.lang.String" value="preferencesMenuItem" noResource="true"/>
               </Properties>
@@ -177,6 +196,7 @@
                 <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
                   <action class="org.jdesktop.application.Application" id="quit" methodName="quit"/>
                 </Property>
+                <Property name="font" type="java.awt.Font" resourceKey="exitMenuItem.font"/>
                 <Property name="name" type="java.lang.String" value="exitMenuItem" noResource="true"/>
               </Properties>
               <AuxValues>
@@ -188,6 +208,7 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="helpMenu">
           <Properties>
+            <Property name="mnemonic" type="int" value="72"/>
             <Property name="text" type="java.lang.String" resourceKey="helpMenu.text"/>
             <Property name="name" type="java.lang.String" value="helpMenu" noResource="true"/>
           </Properties>
@@ -201,6 +222,7 @@
                 <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
                   <action class="smsler.SmslerView" id="showAboutBox" methodName="showAboutBox"/>
                 </Property>
+                <Property name="font" type="java.awt.Font" resourceKey="aboutMenuItem.font"/>
                 <Property name="name" type="java.lang.String" value="aboutMenuItem" noResource="true"/>
               </Properties>
               <AuxValues>
@@ -297,6 +319,6 @@
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
-    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,0,-66,0,0,1,-1"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,0,-59,0,0,1,-1"/>
   </AuxValues>
 </Form>

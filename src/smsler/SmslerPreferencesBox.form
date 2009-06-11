@@ -86,6 +86,7 @@
         <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
           <action class="smsler.SmslerPreferencesBox" id="savePreferences" methodName="savePreferences"/>
         </Property>
+        <Property name="mnemonic" type="int" value="79"/>
         <Property name="text" type="java.lang.String" resourceKey="okButton.text"/>
         <Property name="name" type="java.lang.String" value="okButton" noResource="true"/>
       </Properties>
@@ -95,6 +96,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="cancelButton">
       <Properties>
+        <Property name="mnemonic" type="int" value="67"/>
         <Property name="text" type="java.lang.String" resourceKey="cancelButton.text"/>
         <Property name="name" type="java.lang.String" value="cancelButton" noResource="true"/>
       </Properties>

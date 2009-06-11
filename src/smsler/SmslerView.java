@@ -149,38 +149,52 @@ public class SmslerView extends FrameView {
         mainPanel.setName("mainPanel"); // NOI18N
 
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(smsler.SmslerApp.class).getContext().getResourceMap(SmslerView.class);
+        phoneNumberField.setFont(resourceMap.getFont("phoneNumberField.font")); // NOI18N
         phoneNumberField.setText(resourceMap.getString("phoneNumberField.text")); // NOI18N
         phoneNumberField.setName("phoneNumberField"); // NOI18N
 
+        phoneNumberLabel.setFont(resourceMap.getFont("phoneNumberLabel.font")); // NOI18N
         phoneNumberLabel.setText(resourceMap.getString("phoneNumberLabel.text")); // NOI18N
         phoneNumberLabel.setName("phoneNumberLabel"); // NOI18N
 
+        messageLabel.setFont(resourceMap.getFont("messageLabel.font")); // NOI18N
         messageLabel.setText(resourceMap.getString("messageLabel.text")); // NOI18N
         messageLabel.setName("messageLabel"); // NOI18N
 
         jScrollPane1.setName("jScrollPane1"); // NOI18N
 
         messageField.setColumns(20);
+        messageField.setFont(resourceMap.getFont("messageField.font")); // NOI18N
+        messageField.setLineWrap(true);
         messageField.setRows(5);
         messageField.setName("messageField"); // NOI18N
         jScrollPane1.setViewportView(messageField);
 
+        availMessagesField.setEditable(false);
+        availMessagesField.setFont(resourceMap.getFont("availMessagesField.font")); // NOI18N
         availMessagesField.setText(resourceMap.getString("availMessagesField.text")); // NOI18N
         availMessagesField.setName("availMessagesField"); // NOI18N
 
         javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(smsler.SmslerApp.class).getContext().getActionMap(SmslerView.class, this);
         checkAvailMessagesButton.setAction(actionMap.get("checkButtonPerformed")); // NOI18N
+        checkAvailMessagesButton.setFont(resourceMap.getFont("checkAvailMessagesButton.font")); // NOI18N
+        checkAvailMessagesButton.setMnemonic('C');
         checkAvailMessagesButton.setText(resourceMap.getString("checkAvailMessagesButton.text")); // NOI18N
         checkAvailMessagesButton.setName("checkAvailMessagesButton"); // NOI18N
 
         sendMessageButton.setAction(actionMap.get("sendButtonPerformed")); // NOI18N
+        sendMessageButton.setFont(resourceMap.getFont("sendMessageButton.font")); // NOI18N
+        sendMessageButton.setMnemonic('S');
         sendMessageButton.setText(resourceMap.getString("sendMessageButton.text")); // NOI18N
         sendMessageButton.setName("sendMessageButton"); // NOI18N
 
+        availMessagesLabel.setFont(resourceMap.getFont("availMessagesLabel.font")); // NOI18N
         availMessagesLabel.setText(resourceMap.getString("availMessagesLabel.text")); // NOI18N
         availMessagesLabel.setName("availMessagesLabel"); // NOI18N
 
         clearButton.setAction(actionMap.get("clearButtonPerformed")); // NOI18N
+        clearButton.setFont(resourceMap.getFont("clearButton.font")); // NOI18N
+        clearButton.setMnemonic('L');
         clearButton.setText(resourceMap.getString("clearButton.text")); // NOI18N
         clearButton.setName("clearButton"); // NOI18N
 
@@ -228,29 +242,35 @@ public class SmslerView extends FrameView {
                     .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(sendMessageButton)
                         .addComponent(clearButton)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         menuBar.setName("menuBar"); // NOI18N
 
+        fileMenu.setMnemonic('F');
         fileMenu.setText(resourceMap.getString("fileMenu.text")); // NOI18N
         fileMenu.setName("fileMenu"); // NOI18N
 
         preferencesMenuItem.setAction(actionMap.get("showPreferencesBox")); // NOI18N
+        preferencesMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
+        preferencesMenuItem.setMnemonic('R');
         preferencesMenuItem.setText(resourceMap.getString("preferencesMenuItem.text")); // NOI18N
         preferencesMenuItem.setName("preferencesMenuItem"); // NOI18N
         fileMenu.add(preferencesMenuItem);
 
         exitMenuItem.setAction(actionMap.get("quit")); // NOI18N
+        exitMenuItem.setFont(resourceMap.getFont("exitMenuItem.font")); // NOI18N
         exitMenuItem.setName("exitMenuItem"); // NOI18N
         fileMenu.add(exitMenuItem);
 
         menuBar.add(fileMenu);
 
+        helpMenu.setMnemonic('H');
         helpMenu.setText(resourceMap.getString("helpMenu.text")); // NOI18N
         helpMenu.setName("helpMenu"); // NOI18N
 
         aboutMenuItem.setAction(actionMap.get("showAboutBox")); // NOI18N
+        aboutMenuItem.setFont(resourceMap.getFont("aboutMenuItem.font")); // NOI18N
         aboutMenuItem.setName("aboutMenuItem"); // NOI18N
         helpMenu.add(aboutMenuItem);
 

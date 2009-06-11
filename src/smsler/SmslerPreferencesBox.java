@@ -97,6 +97,7 @@ public class SmslerPreferencesBox extends javax.swing.JDialog {
 
         javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(smsler.SmslerApp.class).getContext().getActionMap(SmslerPreferencesBox.class, this);
         okButton.setAction(actionMap.get("savePreferences")); // NOI18N
+        okButton.setMnemonic('O');
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(smsler.SmslerApp.class).getContext().getResourceMap(SmslerPreferencesBox.class);
         okButton.setText(resourceMap.getString("okButton.text")); // NOI18N
         okButton.setName("okButton"); // NOI18N
@@ -106,6 +107,7 @@ public class SmslerPreferencesBox extends javax.swing.JDialog {
             }
         });
 
+        cancelButton.setMnemonic('C');
         cancelButton.setText(resourceMap.getString("cancelButton.text")); // NOI18N
         cancelButton.setName("cancelButton"); // NOI18N
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
