@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="smsler" default="default" basedir=".">
     <description>Builds, tests, and runs the project smsler.</description>
-    <property 
-        name="launch4j.dir" 
-        location="misc/l4j" 
-    />
-    <import 
-        file="nbproject/build-impl.xml"
-    />
+    <property name="launch4j.dir" location="misc/l4j" />
+    <property name="dist"  location="dist"/>
+    <import file="nbproject/build-impl.xml" />
+
     <taskdef 
         name="launch4j"
         classname="net.sf.launch4j.ant.Launch4jTask"
         classpath="${launch4j.dir}/launch4j.jar:${launch4j.dir}/lib/xstream.jar" 
     />
     <echo>Running launch4j</echo>
-	<launch4j 
-	    configFile="${launch4j.dir}/launch4j.xml" 
+	<launch4j configFile="${launch4j.dir}/launch4j.xml" />
+    
+    <copy todir="${dist}">
+        <fileset dir="misc/sh"/>
+    </copy>
+    <zip 
+        destfile="smsler.zip"
+        basedir="${dist}"
+        update="true"
     />
 </project>
